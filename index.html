@@ -274,6 +274,7 @@
         var speed = 3;
         var mountain_width = 921;
         var rex_width = 400;
+        var rex_width3;
         var rex_height = 400;
         var rex_left = parseInt(screen_width / 12);
         var rex_right;
@@ -291,6 +292,8 @@
             tree_speed_increase = 0.10;
         }
 
+
+        rex_width3 = parseInt(rex_width / 3);
 
         rex_right = rex_left + rex_width;
 
@@ -319,10 +322,13 @@
                 round = true;
             }
 
-            var rex_width3 = parseInt(rex_width / 3);
+            var tree_diff = parseInt(5 + tree_speed_sum);
 
-            if (((tree_x - 5) < (rex_right - rex_width3)) && ((tree_x + 5) > (rex_right - rex_width3)) && round) {
+            if (((tree_x - tree_diff) < (rex_right - rex_width3)) && ((tree_x + tree_diff) > (rex_right - rex_width3)) && round) {
+
+
                 round = false;
+
 
                 if (is_jumping) {
                     score++;
