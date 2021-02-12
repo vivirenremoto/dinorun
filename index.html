@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>🦖 Juego el dinosaurio de chrome #dinoescape</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+
+    <link rel="prefetch" href="static/music4.mp3" />
+    <link rel="prefetch" href="static/rex3.gif" />
+    <link rel="prefetch" href="static/tree2.png" />
+    <link rel="prefetch" href="static/floor3.png" />
+    <link rel="prefetch" href="static/mountains2.png" />
+    <link rel="prefetch" href="static/mountains2_b.png" />
+
+
+
+
+
+
+    <meta property="og:image" content="https://vivirenremoto.github.io/camino_a_andorra/static/social.png">
+    <meta property="og:image:secure_url" content="https://vivirenremoto.github.io/dinoescape/static/social.png">
+    <meta property="og:image:alt" content="Juego el dinosaurio de chrome">
+    <meta property="og:image:type" content="image/png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Juego el dinosaurio de chrome">
+    <meta name="twitter:image" content="https://vivirenremoto.github.io/dinoescape/static/social.png">
+
+
+
+</head>
+
+<body>
+
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+    <style>
+        * {
+            font-family: 'VT323', monospace;
+            text-transform: uppercase;
+
+            -webkit-touch-callout: none;
+            /* iOS Safari */
+            -webkit-user-select: none;
+            /* Safari */
+            -khtml-user-select: none;
+            /* Konqueror HTML */
+            -moz-user-select: none;
+            /* Old versions of Firefox */
+            -ms-user-select: none;
+            /* Internet Explorer/Edge */
+            user-select: none;
+            /* Non-prefixed version, currently
+                supported by Chrome, Edge, Opera and Firefox */
+        }
+
+
+        button {
+            position: relative;
+            background: none;
+            display: inline-block;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
+
+            padding: 5px 10px;
+            border: 1px black solid;
+            border-radius: 5px;
+            text-align: center;
+            color: black;
+            z-index: 999;
+            position: fixed;
+            font-size: 20px;
+            left: 10px;
+            top: 10px;
+        }
+
+        #rex {
+            z-index: 999;
+            background: url('static/rex3.gif');
+            height: 400px;
+            position: fixed;
+            top: 70%;
+            margin-top: -330px;
+            background-size: cover;
+        }
+
+        .tree {
+            z-index: 901;
+            opacity: 1;
+            background: url('static/tree2.png');
+            width: 60px;
+            height: 130px;
+            background-size: contain;
+            position: fixed;
+            top: 56%;
+        }
+
+        #sun1 {
+            opacity: 0.2;
+            z-index: 901;
+            background: yellow;
+            position: fixed;
+            right: 10%;
+            top: 25%;
+            width: 70px;
+            height: 70px;
+            border: 15px yellow solid;
+            margin-right: -15px;
+            margin-top: -15px;
+            border-radius: 100px;
+        }
+
+        #sun2 {
+            opacity: 0.8;
+            z-index: 902;
+            background: yellow;
+            position: fixed;
+            right: 10%;
+            top: 25%;
+            width: 70px;
+            height: 70px;
+            border-radius: 100px;
+        }
+
+        #mountains4 {
+            top: 65%;
+        }
+
+
+
+        @media screen and (max-width: 480px) {
+
+            #rex {
+                height: 200px;
+                top: 79%;
+                margin-top: -230px;
+            }
+
+
+            .tree {
+                width: 31px;
+                height: 125px;
+                top: 61%;
+            }
+
+
+            #sun1 {
+                width: 40px;
+                height: 40px;
+                margin-right: -15px;
+                margin-top: -15px;
+                top: 30%;
+                right: 15%;
+            }
+
+            #sun2 {
+                width: 40px;
+                height: 40px;
+                top: 30%;
+                right: 15%;
+            }
+
+
+        }
+    </style>
+
+
+
+
+    <audio id="music" loop>
+        <source src="static/music4.mp3" type="audio/mp3">
+    </audio>
+
+
+
+    <button onclick="share()">
+
+
+
+        COMPARTIR
+
+        <br>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill"
+            viewBox="0 0 16 16">
+            <path
+                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+        </svg> <span id="top_score">0</span>
+
+
+    </button>
+
+
+    <a href="https://twitter.com/vivirenremoto" target="_blank"
+        style="text-decoration:none;font-size:20px;z-index:999;font-size:25px;color:black;position:fixed;right:10px;top:10px;">
+        by @vivirenremoto
+    </a>
+
+
+    <div id="score"
+        style="z-index:999;position:fixed;font-size:130px;text-align:center;left:0;right:0;bottom:5%;color:white;opacity:0.5;">
+        0</div>
+
+    <div
+        style="z-index:900;background-image: linear-gradient(#D11219, #D75133);position:fixed;left:0;right:0;top:0;height:70%;">
+    </div>
+
+
+
+
+    <div id="sun1">
+    </div>
+
+    <div id="sun2">
+    </div>
+
+    <div id="mountains1" class="mountains"
+        style="z-index:900;opacity:0.2;background:url('static/floor3.png');background-repeat:repeat-x;position:fixed;left:0;right:0;top:40%;bottom:0%;">
+    </div>
+
+
+    <div id="mountains2" class="mountains"
+        style="z-index:901;opacity:0.2;background:url('static/mountains2.png');background-repeat:repeat-x;position:fixed;left:0;right:0;top:50%;bottom:0%;">
+    </div>
+
+    <div id="mountains3" class="mountains"
+        style="z-index:901;opacity:0.3;background:url('static/mountains2_b.png');background-repeat:repeat-x;position:fixed;left:0;right:0;top:59%;bottom:0%;">
+    </div>
+
+    <div id="mountains4" class="mountains"
+        style="z-index:901;opacity:1;background:url('static/floor3.png');background-repeat:repeat-x;position:fixed;left:0;right:0;height:120px;">
+    </div>
+
+
+
+    <div id="tree1" class="tree">
+    </div>
+
+
+    <div style="z-index:998;background:black;position:absolute;left:0;right:0;bottom:0;height:30%;">
+    </div>
+
+    <div id="rex">
+    </div>
+
+
+
+    <script>
+        var is_jumping = false;
+        var round = true;
+
+        var screen_height = $(document).height();
+        var screen_width = $(document).width();
+        var mountains1 = 0;
+        var mountains2 = 0;
+        var mountains3 = 0;
+        var mountains4 = 0;
+        var music_playing = false;
+        var tree_width = 81;
+        var tree_x = screen_width + tree_width;
+        var speed = 3;
+        var mountain_width = 921;
+        var rex_width = 400;
+        var rex_height = 400;
+        var rex_left = parseInt(screen_width / 12);
+        var rex_right;
+        var score = 0;
+        var top_score = 0;
+        var tree_speed_sum = 0;
+        var tree_speed_increase = 0.15;
+
+
+        if (screen_width < 800) {
+            speed = 2;
+            rex_width = 200;
+            rex_height = 200;
+            rex_left = 0;
+            tree_speed_increase = 0.10;
+        }
+
+
+        rex_right = rex_left + rex_width;
+
+
+        $('.mountains').css('width', 921 * 5);
+
+        $('#mountains2').css('left', -200);
+        $('#mountains3').css('left', -400);
+
+
+        $('#tree1').css('left', tree_x);
+
+
+        $('#rex').css('width', rex_width).css('left', rex_left);
+
+        var music = document.getElementById('music');
+        music.volume = 0.5;
+
+
+
+        setInterval(function () {
+            tree_x -= speed + tree_speed_sum;
+
+            if (tree_x <= (tree_width * -1)) {
+                tree_x = screen_width + tree_width;
+                round = true;
+            }
+
+            if (((tree_x - 5) < (rex_right - (rex_width / 3))) && ((tree_x + 5) > (rex_right - (rex_width / 3))) && round) {
+                round = false;
+
+                if (is_jumping) {
+                    score++;
+
+                    if (score > top_score) {
+                        top_score = score;
+                        $('#top_score').html(top_score);
+                    }
+
+
+                    //if (score % 3 == 0) {
+
+                    /*
+                    tree_speed_sum = randomNumber(0, 1);
+
+                    var rand = randomNumber(0, 3);
+
+                    if (rand == 0) {
+
+                    } else if (rand == 3) {
+                        tree_speed -= 1;
+                    } else {
+                        tree_speed += 1;
+                    }
+
+                    */
+
+                    tree_speed_sum += tree_speed_increase;
+
+
+                    //}
+
+
+                } else {
+                    score = 0;
+                    tree_speed_sum = 0;
+                    music.currentTime = 0;
+
+
+
+
+
+                }
+                $('#score').html(score);
+            }
+
+
+
+            $('#tree1').css('left', tree_x);
+        }, 1);
+
+
+
+        setInterval(function () {
+            mountains1 -= 1 + tree_speed_sum;
+
+
+            if (mountains1 <= (mountain_width * -1)) {
+                mountains1 = 0;
+            }
+
+
+
+            $('#mountains1').css('left', mountains1);
+        }, 10);
+
+
+        setInterval(function () {
+            mountains2 -= 1 + tree_speed_sum;
+
+
+
+            if (mountains2 <= (mountain_width * -1)) {
+                mountains2 = 0;
+            }
+
+            $('#mountains2').css('left', mountains2);
+        }, 5);
+
+
+        setInterval(function () {
+            mountains3 -= (speed - 1) + tree_speed_sum;
+
+            if (mountains3 <= (mountain_width * -1)) {
+                mountains3 = 0;
+            }
+
+            $('#mountains3').css('left', mountains3);
+        }, 1);
+
+        setInterval(function () {
+            mountains4 -= speed + tree_speed_sum;
+
+            if (mountains4 <= (mountain_width * -1)) {
+                mountains4 = 0;
+            }
+
+            $('#mountains4').css('left', mountains4);
+        }, 1);
+
+
+        function share() {
+            window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title + ' 👊 ¡Supera mi puntuación! 🔥' + top_score) + '&tw_p=tweetbutton&url=' + document.location.href);
+
+        }
+
+        function randomNumber(min, max) {
+            if (min > max) {
+                let temp = max;
+                max = min;
+                min = temp;
+            }
+
+            if (min <= 0) {
+                return Math.floor(Math.random() * (max + Math.abs(min) + 1)) + min;
+            } else {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+        }
+
+        function jump() {
+
+            if (!music_playing) {
+                music_playing = true;
+                music.play();
+            }
+
+            if (!is_jumping) {
+                is_jumping = true;
+
+                jQuery('#rex').animate({
+                    'margin-top': '-=' + (rex_height / 2)
+                }, 300, function () {
+
+                    jQuery('#rex').animate({
+                        'margin-top': '+=' + + (rex_height / 2)
+                    }, 300, function () {
+                        is_jumping = false;
+                    });
+
+                });
+
+            }
+        }
+
+        $('body').click(function () {
+            jump();
+        });
+
+
+        $('body').keypress(function (e) {
+
+            if (e.keyCode == 32) {
+                e.preventDefault();
+
+
+                jump();
+
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
