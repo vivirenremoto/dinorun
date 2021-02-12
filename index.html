@@ -319,7 +319,9 @@
                 round = true;
             }
 
-            if (((tree_x - 5) < (rex_right - (rex_width / 3))) && ((tree_x + 5) > (rex_right - (rex_width / 3))) && round) {
+            var rex_width3 = parseInt(rex_width / 3);
+
+            if (((tree_x - 5) < (rex_right - rex_width3)) && ((tree_x + 5) > (rex_right - rex_width3)) && round) {
                 round = false;
 
                 if (is_jumping) {
