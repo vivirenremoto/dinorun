@@ -310,7 +310,10 @@
             min_coupon = 30;
         }
 
-        //min_coupon = 1;
+        if (document.location.href.indexOf('test') > -1) {
+            min_coupon = 1;
+        }
+
         rex_width3 = parseInt(rex_width / 3);
 
         rex_right = rex_left + rex_width;
