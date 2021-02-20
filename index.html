@@ -222,9 +222,9 @@
         RÉCORD 50
     </div>
 
-    <a href="https://dinorank.com/" target="_blank" onclick="music_playing=false;music.pause();" id="yes_coupon"
-        style="outline:none;z-index:999;display:none;position:fixed;text-decoration:none;color:yellow;font-size:30px;left:0;right:0;bottom:2%;text-align:center;">
-        ¡HAS GANADO UN CUPÓN!<br>"DINORUN" DINORANK.COM</a>
+    <div onclick="website()" id="yes_coupon"
+        style="cursor:pointer;outline:none;z-index:999;display:none;position:fixed;text-decoration:none;color:yellow;font-size:30px;left:0;right:0;bottom:2%;text-align:center;">
+        ¡HAS GANADO UN CUPÓN!<br>"DINORUN" DINORANK.COM</div>
 
     <div id="score"
         style="z-index:999;position:fixed;font-size:130px;text-align:center;left:0;right:0;bottom:8%;color:white;opacity:0.5;">
@@ -507,6 +507,16 @@
                 });
 
             }
+        }
+
+        function website() {
+            window.open('https://dinorank.com/');
+            setTimeout(function () {
+                $('#yes_coupon').hide();
+                music_playing = false;
+                music.pause();
+
+            }, 500);
         }
 
         $('body').on('touchstart mousedown', function (e) {
