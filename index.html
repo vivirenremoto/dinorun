@@ -46,11 +46,11 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-36JKZD0YKP"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-      gtag('config', 'G-36JKZD0YKP');
+        gtag('config', 'G-36JKZD0YKP');
     </script>
 
 
@@ -486,10 +486,7 @@
 
         function jump() {
 
-            if (!music_playing) {
-                music_playing = true;
-                music.play();
-            }
+
 
             if (!is_jumping) {
                 is_jumping = true;
@@ -513,6 +510,12 @@
             jump();
         });
 
+        $('body').click(function () {
+            if (!music_playing) {
+                music_playing = true;
+                music.play();
+            }
+        });
 
         $('body').keydown(function (e) {
 
