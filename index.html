@@ -74,6 +74,12 @@
                 supported by Chrome, Edge, Opera and Firefox */
         }
 
+        body {
+            overflow: hidden;
+            max-height: 100%;
+
+        }
+
 
         button {
             position: relative;
@@ -194,82 +200,89 @@
 
 
 
-    <button onclick="share()" style="text-align:left">
+
+    <div id="game" style="position:fixed;left:0;right:0;top:0;bottom:0;">
+
+
+        <button onclick="share()" style="text-align:left">
 
 
 
-        COMPARTIR
+            COMPARTIR
 
-        <br>
-
-
-
-        RÉCORD <span id="top_score">0</span>
-
-
-    </button>
-
-
-    <a href="https://twitter.com/vivirenremoto" target="_blank"
-        style="text-decoration:none;font-size:20px;z-index:999;font-size:25px;color:black;position:fixed;right:10px;top:10px;">
-        by @vivirenremoto
-    </a>
+            <br>
 
 
 
-    <div id="no_coupon"
-        style="z-index:999;position:fixed;color:white;font-size:30px;left:0;right:0;bottom:5%;text-align:center;">
-        RÉCORD 50
-    </div>
+            RÉCORD <span id="top_score">0</span>
 
-    <div onclick="website()" id="yes_coupon"
-        style="cursor:pointer;outline:none;z-index:999;display:none;position:fixed;text-decoration:none;color:yellow;font-size:30px;left:0;right:0;bottom:2%;text-align:center;">
-        ¡HAS GANADO UN CUPÓN!<br>"DINORUN" DINORANK.COM</div>
 
-    <div id="score"
-        style="z-index:999;position:fixed;font-size:130px;text-align:center;left:0;right:0;bottom:8%;color:white;opacity:0.5;">
-        0</div>
+        </button>
 
-    <div
-        style="z-index:900;background-image: linear-gradient(#D11219, #D75133);position:fixed;left:0;right:0;top:0;height:70%;">
-    </div>
+
+        <a href="https://twitter.com/vivirenremoto" target="_blank"
+            style="text-decoration:none;font-size:20px;z-index:999;font-size:25px;color:black;position:fixed;right:10px;top:10px;">
+            by @vivirenremoto
+        </a>
 
 
 
+        <div id="no_coupon"
+            style="z-index:999;position:fixed;color:white;font-size:30px;left:0;right:0;bottom:5%;text-align:center;">
+            RÉCORD 50
+        </div>
 
-    <div id="sun1">
-    </div>
+        <div onclick="website()" id="yes_coupon"
+            style="cursor:pointer;outline:none;z-index:999;display:none;position:fixed;text-decoration:none;color:yellow;font-size:30px;left:0;right:0;bottom:2%;text-align:center;">
+            ¡HAS GANADO UN CUPÓN!<br>"DINORUN" DINORANK.COM</div>
 
-    <div id="sun2">
-    </div>
+        <div id="score"
+            style="z-index:999;position:fixed;font-size:130px;text-align:center;left:0;right:0;bottom:8%;color:white;opacity:0.5;">
+            0</div>
 
-    <div id="mountains1" class="mountains"
-        style="z-index:900;opacity:0.2;background:url('static/floor3.png');background-repeat:repeat-x;position:fixed;left:0;right:0;top:40%;bottom:0%;">
-    </div>
-
-
-    <div id="mountains2" class="mountains"
-        style="z-index:901;opacity:0.2;background:url('static/mountains2.png');background-repeat:repeat-x;position:fixed;left:0;right:0;top:50%;bottom:0%;">
-    </div>
-
-    <div id="mountains3" class="mountains"
-        style="z-index:901;opacity:0.3;background:url('static/mountains2_b.png');background-repeat:repeat-x;position:fixed;left:0;right:0;top:59%;bottom:0%;">
-    </div>
-
-    <div id="mountains4" class="mountains"
-        style="z-index:901;opacity:1;background:url('static/floor3.png');background-repeat:repeat-x;position:fixed;left:0;right:0;height:120px;">
-    </div>
+        <div
+            style="z-index:900;background-image: linear-gradient(#D11219, #D75133);position:fixed;left:0;right:0;top:0;height:70%;">
+        </div>
 
 
 
-    <div id="tree1" class="tree">
-    </div>
+
+        <div id="sun1">
+        </div>
+
+        <div id="sun2">
+        </div>
+
+        <div id="mountains1" class="mountains"
+            style="z-index:900;opacity:0.2;background:url('static/floor3.png');background-repeat:repeat-x;position:fixed;left:0;right:0;top:40%;bottom:0%;">
+        </div>
 
 
-    <div id="blackbar" style="z-index:998;background:black;position:absolute;left:0;right:0;bottom:0;height:30%;">
-    </div>
+        <div id="mountains2" class="mountains"
+            style="z-index:901;opacity:0.2;background:url('static/mountains2.png');background-repeat:repeat-x;position:fixed;left:0;right:0;top:50%;bottom:0%;">
+        </div>
 
-    <div id="rex">
+        <div id="mountains3" class="mountains"
+            style="z-index:901;opacity:0.3;background:url('static/mountains2_b.png');background-repeat:repeat-x;position:fixed;left:0;right:0;top:59%;bottom:0%;">
+        </div>
+
+        <div id="mountains4" class="mountains"
+            style="z-index:901;opacity:1;background:url('static/floor3.png');background-repeat:repeat-x;position:fixed;left:0;right:0;height:120px;">
+        </div>
+
+
+
+        <div id="tree1" class="tree">
+        </div>
+
+
+        <div id="blackbar" style="z-index:998;background:black;position:absolute;left:0;right:0;bottom:0;height:30%;">
+        </div>
+
+        <div id="rex">
+        </div>
+
+
     </div>
 
 
@@ -278,8 +291,8 @@
         var is_jumping = false;
         var round = true;
 
-        var screen_height = $(document).height();
-        var screen_width = $(document).width();
+        var screen_height = $(window).height();
+        var screen_width = $(window).width();
         var mountains1 = 0;
         var mountains2 = 0;
         var mountains3 = 0;
@@ -300,6 +313,7 @@
         var tree_speed_increase = 0.15;
         var min_coupon = 50;
         var win = false;
+        var timer_seconds = 0;
 
         if (screen_width < 800) {
             speed = 2;
@@ -331,12 +345,71 @@
 
         $('#rex').css('width', rex_width).css('left', rex_left);
 
+
+        $('#game').css('height', screen_height + 'px');
+
         var music = document.getElementById('music');
         music.volume = 0.5;
 
 
 
+
         setInterval(function () {
+
+            timer_seconds++;
+
+
+
+
+            // montaña 1
+            if (timer_seconds % 2 == 0) {
+                mountains1 -= 1 + tree_speed_sum;
+
+
+                if (mountains1 <= (mountain_width * -1)) {
+                    mountains1 = 0;
+                }
+
+
+
+                $('#mountains1').css('left', mountains1);
+            }
+
+            // montaña 2
+            if (timer_seconds % 1 == 0) {
+                mountains2 -= 1 + tree_speed_sum;
+
+
+
+                if (mountains2 <= (mountain_width * -1)) {
+                    mountains2 = 0;
+                }
+
+                $('#mountains2').css('left', mountains2);
+            }
+
+
+            // montaña 3
+            mountains3 -= (speed - 1) + tree_speed_sum;
+
+            if (mountains3 <= (mountain_width * -1)) {
+                mountains3 = 0;
+            }
+
+            $('#mountains3').css('left', mountains3);
+
+
+            // montaña 4
+            mountains4 -= speed + tree_speed_sum;
+
+            if (mountains4 <= (mountain_width * -1)) {
+                mountains4 = 0;
+            }
+
+            $('#mountains4').css('left', mountains4);
+
+            // score
+
             tree_x -= speed + tree_speed_sum;
 
             if (tree_x <= (tree_width * -1)) {
@@ -377,27 +450,10 @@
                     }
 
 
-                    //if (score % 3 == 0) {
 
-                    /*
-                    tree_speed_sum = randomNumber(0, 1);
-
-                    var rand = randomNumber(0, 3);
-
-                    if (rand == 0) {
-
-                    } else if (rand == 3) {
-                        tree_speed -= 1;
-                    } else {
-                        tree_speed += 1;
-                    }
-
-                    */
 
                     tree_speed_sum += tree_speed_increase;
 
-
-                    //}
 
 
                 } else {
@@ -416,55 +472,7 @@
 
 
             $('#tree1').css('left', tree_x);
-        }, 1);
 
-
-
-        setInterval(function () {
-            mountains1 -= 1 + tree_speed_sum;
-
-
-            if (mountains1 <= (mountain_width * -1)) {
-                mountains1 = 0;
-            }
-
-
-
-            $('#mountains1').css('left', mountains1);
-        }, 10);
-
-
-        setInterval(function () {
-            mountains2 -= 1 + tree_speed_sum;
-
-
-
-            if (mountains2 <= (mountain_width * -1)) {
-                mountains2 = 0;
-            }
-
-            $('#mountains2').css('left', mountains2);
-        }, 5);
-
-
-        setInterval(function () {
-            mountains3 -= (speed - 1) + tree_speed_sum;
-
-            if (mountains3 <= (mountain_width * -1)) {
-                mountains3 = 0;
-            }
-
-            $('#mountains3').css('left', mountains3);
-        }, 1);
-
-        setInterval(function () {
-            mountains4 -= speed + tree_speed_sum;
-
-            if (mountains4 <= (mountain_width * -1)) {
-                mountains4 = 0;
-            }
-
-            $('#mountains4').css('left', mountains4);
         }, 1);
 
 
