@@ -167,7 +167,7 @@
 
             #rex {
                 height: 200px;
-                top: 64%;
+                top: 66%;
                 margin-top: -230px;
             }
 
@@ -333,13 +333,18 @@
         var win = false;
         var timer_seconds = 0;
 
-        if (screen_width < 800) {
-            speed = 2;
+        if (!is_desktop) {
+            //speed = 2;
             rex_width = 200;
             rex_height = 200;
             rex_left = -10;
             tree_speed_increase = 0.10;
             min_coupon = 20;
+
+
+            $('#mountains1').hide();
+            $('#mountains2').hide();
+            $('#mountains3').hide();
         }
 
         if (document.location.href.indexOf('test') > -1) {
@@ -357,12 +362,7 @@
         $('#mountains2').css('left', -200);
         $('#mountains3').css('left', -400);
 
-        if (!is_desktop) {
-            $('#mountains1').hide();
-            $('#mountains2').hide();
-            $('#mountains3').hide();
-            //$('#mountains3').css('top', '35%')
-        }
+
 
 
         $('#tree1').css('left', tree_x);
