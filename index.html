@@ -519,11 +519,13 @@
                 is_jumping = true;
 
                 jQuery('#rex').animate({
-                    'margin-top': '-=' + (rex_height / 2)
+                    'margin-top': '-=' + (rex_height / 1.5)
                 }, 300, function () {
 
-                    jQuery('#rex').animate({
-                        'margin-top': '+=' + + (rex_height / 2)
+
+
+                    jQuery('#rex').delay(100).animate({
+                        'margin-top': '+=' + + (rex_height / 1.5)
                     }, 300, function () {
                         is_jumping = false;
                     });
