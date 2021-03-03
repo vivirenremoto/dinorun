@@ -108,7 +108,7 @@
             position: fixed;
             top: 60%;
             margin-top: -330px;
-            background-size: cover;
+            background-size: contain;
         }
 
         .tree {
@@ -357,7 +357,9 @@
         $('#mountains3').css('left', -400);
 
         if (!is_desktop) {
+            $('#mountains1').hide();
             $('#mountains2').hide();
+            $('#mountains3').hide();
             //$('#mountains3').css('top', '35%')
         }
 
@@ -384,23 +386,23 @@
 
 
 
+            if (is_desktop) {
 
-            // montaña 1
-            if (timer_seconds % 2 == 0) {
-                mountains1 -= 1 + tree_speed_sum;
+                // montaña 1
+                if (timer_seconds % 2 == 0) {
+                    mountains1 -= 1 + tree_speed_sum;
 
 
-                if (mountains1 <= (mountain_width * -1)) {
-                    mountains1 = 0;
+                    if (mountains1 <= (mountain_width * -1)) {
+                        mountains1 = 0;
+                    }
+
+
+
+                    $('#mountains1').css('left', mountains1);
                 }
 
-
-
-                $('#mountains1').css('left', mountains1);
-            }
-
-            // montaña 2
-            if (is_desktop) {
+                // montaña 2
                 if (timer_seconds % 1 == 0) {
                     mountains2 -= 1 + tree_speed_sum;
 
@@ -412,16 +414,16 @@
 
                     $('#mountains2').css('left', mountains2);
                 }
+
+                // montaña 3
+                mountains3 -= (speed - 1) + tree_speed_sum;
+
+                if (mountains3 <= (mountain_width * -1)) {
+                    mountains3 = 0;
+                }
+
+                $('#mountains3').css('left', mountains3);
             }
-
-            // montaña 3
-            mountains3 -= (speed - 1) + tree_speed_sum;
-
-            if (mountains3 <= (mountain_width * -1)) {
-                mountains3 = 0;
-            }
-
-            $('#mountains3').css('left', mountains3);
 
 
             // montaña 4
