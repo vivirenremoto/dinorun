@@ -119,7 +119,7 @@
             height: 130px;
             background-size: contain;
             position: fixed;
-            top: 47%;
+            top: 56%;
         }
 
         #sun1 {
@@ -162,11 +162,21 @@
             top: 74%;
         }
 
-        @media screen and (max-width: 480px) {
+        #sky {
+            z-index: 900;
+            background-image: linear-gradient(#D11219, #D75133);
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 70%;
+        }
+
+        @media screen and (max-width: 800px) {
 
             #rex {
                 height: 200px;
-                top: 69%;
+                top: 67%;
                 margin-top: -230px;
             }
 
@@ -184,20 +194,26 @@
                 margin-right: -15px;
                 margin-top: -15px;
                 right: 15%;
+                display: none;
             }
 
             #sun2 {
                 width: 40px;
                 height: 40px;
                 right: 15%;
+                display: none;
             }
 
             #yes_coupon {
-                top: 79%;
+                top: 77%;
             }
 
             #no_coupon {
-                top: 79%;
+                top: 77%;
+            }
+
+            #sky {
+                background-image: linear-gradient(#D11219, orange);
             }
 
 
@@ -256,8 +272,7 @@
             "DINORUN"</div>
 
 
-        <div
-            style="z-index:900;background-image: linear-gradient(#D11219, #D75133);position:fixed;left:0;right:0;top:0;height:70%;">
+        <div id="sky">
         </div>
 
 
@@ -309,6 +324,7 @@
 
         var screen_height = $(window).height();
         var screen_width = $(window).width();
+        var is_desktop = screen_width > 800;
         var mountains1 = 0;
         var mountains2 = 0;
         var mountains3 = 0;
@@ -331,13 +347,18 @@
         var win = false;
         var timer_seconds = 0;
 
-        if (screen_width < 800) {
-            speed = 2;
+        if (!is_desktop) {
+            //speed = 2;
             rex_width = 200;
             rex_height = 200;
             rex_left = -10;
             tree_speed_increase = 0.10;
             min_coupon = 20;
+
+
+            $('#mountains1').hide();
+            $('#mountains2').hide();
+            $('#mountains3').hide();
         }
 
         if (document.location.href.indexOf('test') > -1) {
@@ -356,6 +377,8 @@
         $('#mountains3').css('left', -400);
 
 
+
+
         $('#tree1').css('left', tree_x);
 
 
@@ -370,49 +393,52 @@
 
 
 
+
+
         setInterval(function () {
 
             timer_seconds++;
 
 
 
+            if (is_desktop) {
 
-            // montaña 1
-            if (timer_seconds % 2 == 0) {
-                mountains1 -= 1 + tree_speed_sum;
+                // montaña 1
+                if (timer_seconds % 2 == 0) {
+                    mountains1 -= 1 + tree_speed_sum;
 
 
-                if (mountains1 <= (mountain_width * -1)) {
-                    mountains1 = 0;
+                    if (mountains1 <= (mountain_width * -1)) {
+                        mountains1 = 0;
+                    }
+
+
+
+                    $('#mountains1').css('left', mountains1);
                 }
 
-
-
-                $('#mountains1').css('left', mountains1);
-            }
-
-            // montaña 2
-            if (timer_seconds % 1 == 0) {
-                mountains2 -= 1 + tree_speed_sum;
+                // montaña 2
+                if (timer_seconds % 1 == 0) {
+                    mountains2 -= 1 + tree_speed_sum;
 
 
 
-                if (mountains2 <= (mountain_width * -1)) {
-                    mountains2 = 0;
+                    if (mountains2 <= (mountain_width * -1)) {
+                        mountains2 = 0;
+                    }
+
+                    $('#mountains2').css('left', mountains2);
                 }
 
-                $('#mountains2').css('left', mountains2);
+                // montaña 3
+                mountains3 -= (speed - 1) + tree_speed_sum;
+
+                if (mountains3 <= (mountain_width * -1)) {
+                    mountains3 = 0;
+                }
+
+                $('#mountains3').css('left', mountains3);
             }
-
-
-            // montaña 3
-            mountains3 -= (speed - 1) + tree_speed_sum;
-
-            if (mountains3 <= (mountain_width * -1)) {
-                mountains3 = 0;
-            }
-
-            $('#mountains3').css('left', mountains3);
 
 
             // montaña 4
