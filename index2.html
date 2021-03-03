@@ -102,7 +102,6 @@
         }
 
         #rex {
-            border: 1px greenyellow solid;
             z-index: 999;
             background: url('static/rex3.gif');
             height: 400px;
@@ -163,11 +162,21 @@
             top: 74%;
         }
 
+        #sky {
+            z-index: 900;
+            background-image: linear-gradient(#D11219, #D75133);
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 70%;
+        }
+
         @media screen and (max-width: 800px) {
 
             #rex {
                 height: 200px;
-                top: 66%;
+                top: 67%;
                 margin-top: -230px;
             }
 
@@ -185,12 +194,14 @@
                 margin-right: -15px;
                 margin-top: -15px;
                 right: 15%;
+                display: none;
             }
 
             #sun2 {
                 width: 40px;
                 height: 40px;
                 right: 15%;
+                display: none;
             }
 
             #yes_coupon {
@@ -199,6 +210,10 @@
 
             #no_coupon {
                 top: 79%;
+            }
+
+            #sky {
+                background-image: linear-gradient(#D11219, #D75133, yellow);
             }
 
 
@@ -257,8 +272,7 @@
             "DINORUN"</div>
 
 
-        <div
-            style="z-index:900;background-image: linear-gradient(#D11219, #D75133);position:fixed;left:0;right:0;top:0;height:70%;">
+        <div id="sky">
         </div>
 
 
