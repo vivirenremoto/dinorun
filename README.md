@@ -1,6 +1,6 @@
 # Juego el dinosaurio de chrome
  
-[Web - Juego](https://vivirenremoto.github.io/dinogame/)
+[Web - Juego](https://vivirenremoto.github.io/dinorun/)
 
 [Autor](https://twitter.com/vivirenremoto)
 
