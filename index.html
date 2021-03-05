@@ -112,6 +112,23 @@
             background-size: cover;
         }
 
+        .blink {
+            animation: blink-animation 0.4s steps(5, start) infinite;
+            -webkit-animation: blink-animation 0.4s steps(5, start) infinite;
+        }
+
+        @keyframes blink-animation {
+            to {
+                visibility: hidden;
+            }
+        }
+
+        @-webkit-keyframes blink-animation {
+            to {
+                visibility: hidden;
+            }
+        }
+
         .tree {
             z-index: 901;
             opacity: 1;
@@ -360,6 +377,7 @@
         var win = false;
         var timer_seconds = 0;
         var is_mobile = screen_width < 800;
+        var is_restart = false;
 
         if (is_mobile) {
             speed = 2;
@@ -492,7 +510,7 @@
                 round = true;
             }
 
-            var tree_diff = parseInt(5 + tree_speed_sum);
+            var tree_diff = parseInt(10 + tree_speed_sum);
 
             if (((tree_x - tree_diff) < (rex_right - rex_width3)) && ((tree_x + tree_diff) > (rex_right - rex_width3)) && round) {
 
@@ -564,19 +582,33 @@
 
 
                 } else {
+
+
+
+
                     score = 0;
                     tree_speed_sum = 0;
                     music.currentTime = 0;
 
-                    $('#rex').fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+
+                    $('#rex').addClass('blink');
+                    //fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+
 
                     $('#score').html('0').css('color', '#ff0000').css('opacity', 1);
+
 
 
                     setTimeout(function () {
 
                         $('#score').html(score).css('color', 'white').css('opacity', 0.5);
-                    }, 250);
+
+
+
+
+                        $('#rex').removeClass('blink');
+
+                    }, 1000);
 
                     if (music_playing) {
                         sound_fail.play();
@@ -586,6 +618,10 @@
                             $('#btn_fast').show();
                         }
                     }
+
+
+
+
 
                 }
             }
