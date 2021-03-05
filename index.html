@@ -15,6 +15,7 @@
     <script src="https://cdn.jsdelivr.net/gh/mathusummut/confetti.js/confetti.min.js"></script>
 
     <link rel="prefetch" href="static/music4.mp3" />
+    <link rel="prefetch" href="static/fail.mp3" />
     <link rel="prefetch" href="static/rex3.gif" />
     <link rel="prefetch" href="static/tree3.png" />
     <link rel="prefetch" href="static/floor3.png" />
@@ -211,6 +212,9 @@
         <source src="static/music4.mp3" type="audio/mp3">
     </audio>
 
+    <audio id="sound_fail">
+        <source src="static/fail.mp3" type="audio/mp3">
+    </audio>
 
 
 
@@ -387,19 +391,20 @@
 
 
 
-            $('#lnk_fast').attr('href', 'index.html?speed=' + (speed + 0.5)).show();
+            $('#lnk_fast').attr('href', 'index.html?speed=' + (speed + 0.25)).show();
 
-            if (1 >= speed) {
-                speed = 1.5;
+            if (1 < speed) {
+                $('#lnk_slow').attr('href', 'index.html?speed=' + (speed - 0.25)).show();
             }
 
 
-            $('#lnk_slow').attr('href', 'index.html?speed=' + (speed - 0.5)).show();
 
         }
 
         var music = document.getElementById('music');
         music.volume = 0.5;
+
+        var sound_fail = document.getElementById('sound_fail');
 
 
 
@@ -512,9 +517,11 @@
                     tree_speed_sum = 0;
                     music.currentTime = 0;
 
+                    $('#rex').fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
 
 
 
+                    sound_fail.play();
 
                 }
                 $('#score').html(score);
