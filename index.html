@@ -225,7 +225,7 @@
     <div id="game" style="position:fixed;left:0;right:0;top:0;bottom:0;">
 
 
-        <button onclick="share()" style="text-align:left">
+        <button onclick="share()" style="text-align:left" id="btn_share">
 
 
 
@@ -531,6 +531,8 @@
                         $('#no_coupon').hide();
 
                         $('#yes_coupon').show();
+
+                        $('#btn_share').css('border-color', 'white').css('background', 'white');
 
 
                     }
