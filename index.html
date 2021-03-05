@@ -237,10 +237,10 @@
         </button>
 
 
-        <a href="https://twitter.com/vivirenremoto" target="_blank"
-            style="text-decoration:none;font-size:20px;z-index:999;font-size:25px;color:black;position:fixed;right:10px;top:10px;">
+        <div onclick="author()"
+            style="cursor:pointer;font-size:20px;z-index:999;font-size:25px;color:black;position:fixed;right:10px;top:10px;">
             by @vivirenremoto
-        </a>
+        </div>
 
 
 
@@ -544,8 +544,9 @@
                         $('#score').html(score).css('color', 'white').css('opacity', 0.5);
                     }, 250);
 
-
-                    sound_fail.play();
+                    if (music_playing) {
+                        sound_fail.play();
+                    }
 
                 }
             }
@@ -558,11 +559,27 @@
 
 
         function share() {
-            music_playing = false;
-            music.pause();
+
 
             window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title + ' 👊 ¡Supera mi puntuación! 🔥' + top_score) + '&tw_p=tweetbutton&url=' + encodeURIComponent('https://vivirenremoto.github.io/dinorun/'));
 
+            setTimeout(function () {
+                music_playing = false;
+                music.pause();
+            }, 500);
+
+        }
+
+        function author() {
+
+
+            window.open('https://twitter.com/vivirenremoto');
+
+
+            setTimeout(function () {
+                music_playing = false;
+                music.pause();
+            }, 500);
         }
 
         function randomNumber(min, max) {
