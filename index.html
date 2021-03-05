@@ -273,7 +273,7 @@
         <div id="yes_coupon"
             style="z-index:999;display:none;position:fixed;text-decoration:none;color:yellow;font-size:30px;left:10%;right:10%;text-align:center;">
             ¡HAS GANADO UN CUPÓN! <span onclick="website()"
-                style="cursor:pointer;outline:none;text-decoration:underline;">DINORANK.COM</span>
+                style="cursor:pointer;outline:none;border-bottom:1px yellow solid;">DINORANK.COM</span>
             "DINORUN"</div>
 
 
@@ -527,13 +527,21 @@
 
                         setTimeout(function () {
                             confetti.stop();
-                        }, 1000);
+                        }, 600);
+
+
 
                         $('#no_coupon').hide();
 
                         $('#yes_coupon').show();
 
-                        $('#btn_share').css('border-color', 'white').css('background', 'white');
+
+                        setTimeout(function () {
+
+                            $('#btn_share').css('border-color', 'white').css('background', 'white');
+
+                        }, 2000);
+
 
 
                     }
