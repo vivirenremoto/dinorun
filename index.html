@@ -175,7 +175,7 @@
             .tree {
                 width: 31px;
                 height: 125px;
-                top: 51%;
+                top: 50%;
             }
 
 
@@ -348,14 +348,15 @@
         var min_coupon = 50;
         var win = false;
         var timer_seconds = 0;
+        var is_mobile = screen_width < 800;
 
-        if (screen_width < 800) {
-            //speed = 2;
+        if (is_mobile) {
+            speed = 2;
             rex_width = 200;
             rex_height = 200;
             rex_left = -10;
             min_coupon = 20;
-            tree_speed_increase = 0.10;
+            //tree_speed_increase = 0.10;
         }
 
         if (document.location.href.indexOf('test') > -1) {
@@ -387,7 +388,7 @@
         $('#game').css('height', screen_height + 'px');
 
 
-        if (screen_width < 800) {
+        if (is_mobile) {
 
 
 
@@ -470,6 +471,12 @@
 
             if (tree_x <= (tree_width * -1)) {
                 tree_x = screen_width + tree_width;
+
+
+                if (is_mobile) {
+                    tree_x += screen_width;
+                }
+
                 round = true;
             }
 
