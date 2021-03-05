@@ -225,7 +225,7 @@
     <div id="game" style="position:fixed;left:0;right:0;top:0;bottom:0;">
 
 
-        <button onclick="share()" style="text-align:left" id="btn_share">
+        <button onclick="share()" style="text-align:left;margin-left:5px;" id="btn_share">
 
 
 
@@ -365,9 +365,10 @@
             speed = 2;
             rex_width = 200;
             rex_height = 200;
-            rex_left = -10;
+            rex_left = -30;
             min_coupon = 20;
             tree_speed_increase = 0.10;
+            tree_x += screen_width;
         }
 
         if (document.location.href.indexOf('test') > -1) {
@@ -485,7 +486,7 @@
 
 
                 if (is_mobile) {
-                    tree_x += (screen_width * 2);
+                    tree_x += screen_width;
                 }
 
                 round = true;
@@ -502,7 +503,7 @@
                 if (is_jumping) {
                     score++;
 
-                    if (score > 2) {
+                    if (score > 1) {
 
                         $('#info').hide();
 
