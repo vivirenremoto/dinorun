@@ -602,10 +602,7 @@
 
             window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title + ' 👊 ¡Supera mi puntuación! 🔥' + top_score) + '&tw_p=tweetbutton&url=' + encodeURIComponent('https://vivirenremoto.github.io/dinorun/'));
 
-            setTimeout(function () {
-                music_playing = false;
-                music.pause();
-            }, 500);
+
 
         }
 
@@ -615,10 +612,7 @@
             window.open('https://twitter.com/vivirenremoto');
 
 
-            setTimeout(function () {
-                music_playing = false;
-                music.pause();
-            }, 500);
+
         }
 
         function randomNumber(min, max) {
@@ -660,13 +654,8 @@
         }
 
         function website() {
-            window.open('https://dinorank.com/');
-            setTimeout(function () {
-                //$('#yes_coupon').hide();
-                music_playing = false;
-                music.pause();
+            window.open('https://bit.ly/dinorun1');
 
-            }, 500);
         }
 
         $('body').on('touchstart mousedown', function (e) {
@@ -690,6 +679,19 @@
 
             }
         });
+
+
+
+        $(window).blur(function () {
+            setTimeout(function () {
+                //$('#yes_coupon').hide();
+                music_playing = false;
+                music.pause();
+
+            }, 500);
+        });
+
+
     </script>
 
 
