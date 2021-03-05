@@ -510,7 +510,7 @@
                 round = true;
             }
 
-            var tree_diff = parseInt(10 + tree_speed_sum);
+            var tree_diff = parseInt(5 + tree_speed_sum);
 
             if (((tree_x - tree_diff) < (rex_right - rex_width3)) && ((tree_x + tree_diff) > (rex_right - rex_width3)) && round) {
 
@@ -595,7 +595,7 @@
                     //fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
 
 
-                    $('#score').html('0').css('color', '#ff0000').css('opacity', 1);
+                    $('#score').html(score).css('color', '#ff0000').css('opacity', 1);
 
 
 
@@ -611,6 +611,7 @@
                     }, 1000);
 
                     if (music_playing) {
+                        sound_fail.currentTime = 0;
                         sound_fail.play();
 
                         if (is_mobile) {
