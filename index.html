@@ -512,19 +512,35 @@
 
 
 
+
+                    $('#score').html('+').css('color', '#00ff00').css('opacity', 1);
+
+
+                    setTimeout(function () {
+
+                        $('#score').html(score).css('color', 'white').css('opacity', 0.5);
+                    }, 250);
+
+
                 } else {
                     score = 0;
                     tree_speed_sum = 0;
                     music.currentTime = 0;
 
-                    $('#rex').fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+                    $('#rex').fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
 
+                    $('#score').html('0').css('color', '#ff0000').css('opacity', 1);
+
+
+                    setTimeout(function () {
+
+                        $('#score').html(score).css('color', 'white').css('opacity', 0.5);
+                    }, 250);
 
 
                     sound_fail.play();
 
                 }
-                $('#score').html(score);
             }
 
 
