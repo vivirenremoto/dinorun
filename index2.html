@@ -15,6 +15,7 @@
     <script src="https://cdn.jsdelivr.net/gh/mathusummut/confetti.js/confetti.min.js"></script>
 
     <link rel="prefetch" href="static/music4.mp3" />
+    <link rel="prefetch" href="static/fail.mp3" />
     <link rel="prefetch" href="static/rex3.gif" />
     <link rel="prefetch" href="static/tree3.png" />
     <link rel="prefetch" href="static/floor3.png" />
@@ -111,6 +112,23 @@
             background-size: cover;
         }
 
+        .blink {
+            animation: blink-animation 0.4s steps(5, start) infinite;
+            -webkit-animation: blink-animation 0.4s steps(5, start) infinite;
+        }
+
+        @keyframes blink-animation {
+            to {
+                visibility: hidden;
+            }
+        }
+
+        @-webkit-keyframes blink-animation {
+            to {
+                visibility: hidden;
+            }
+        }
+
         .tree {
             z-index: 901;
             opacity: 1;
@@ -119,7 +137,7 @@
             height: 130px;
             background-size: contain;
             position: fixed;
-            top: 56%;
+            top: 45%;
         }
 
         #sun1 {
@@ -162,21 +180,15 @@
             top: 74%;
         }
 
-        #sky {
-            z-index: 900;
-            background-image: linear-gradient(#D11219, #D75133);
-            position: fixed;
-            left: 0;
-            right: 0;
-            top: 0;
-            height: 70%;
-        }
-
         @media screen and (max-width: 800px) {
+
+            #info {
+                display: none;
+            }
 
             #rex {
                 height: 200px;
-                top: 67%;
+                top: 69%;
                 margin-top: -230px;
             }
 
@@ -184,7 +196,7 @@
             .tree {
                 width: 31px;
                 height: 125px;
-                top: 51%;
+                top: 50%;
             }
 
 
@@ -194,26 +206,24 @@
                 margin-right: -15px;
                 margin-top: -15px;
                 right: 15%;
-                display: none;
             }
 
             #sun2 {
                 width: 40px;
                 height: 40px;
                 right: 15%;
-                display: none;
             }
 
             #yes_coupon {
-                top: 77%;
+                top: 79%;
             }
 
             #no_coupon {
-                top: 77%;
+                top: 79%;
             }
 
-            #sky {
-                background-image: linear-gradient(#D11219, orange);
+            #btn_share {
+                width: 100px;
             }
 
 
@@ -227,32 +237,47 @@
         <source src="static/music4.mp3" type="audio/mp3">
     </audio>
 
+    <audio id="sound_fail">
+        <source src="static/fail.mp3" type="audio/mp3">
+    </audio>
 
 
 
     <div id="game" style="position:fixed;left:0;right:0;top:0;bottom:0;">
 
 
-        <button onclick="share()" style="text-align:left">
+        <button onclick="share()" style="text-align:left;margin-left:5px;" id="btn_share">
 
 
 
-            COMPARTIR
-
-            <br>
-
-
-
-            RÉCORD <span id="top_score">0</span>
+            COMPARTIR RÉCORD <span id="top_score">0</span>
 
 
         </button>
 
 
-        <a href="https://twitter.com/vivirenremoto" target="_blank"
-            style="text-decoration:none;font-size:20px;z-index:999;font-size:25px;color:black;position:fixed;right:10px;top:10px;">
+        <div onclick="author()"
+            style="cursor:pointer;font-size:20px;z-index:999;font-size:25px;color:black;position:fixed;right:10px;top:10px;">
             by @vivirenremoto
+        </div>
+
+
+
+        <a id="btn_slow" href="index.html"
+            style="display:none;text-decoration:none;font-size:20px;z-index:999;font-size:25px;color:white;position:fixed;left:10px;bottom:10px;">
+            ¿MUY RÁPIDO?
         </a>
+
+        <!--
+        <a id="btn_fast" href="#"
+            style="display:none;text-decoration:none;font-size:20px;z-index:999;font-size:25px;color:white;position:fixed;right:10px;bottom:10px;">
+            +LENTO
+        </a>
+        <a id="btn_fast" href="#"
+            style="display:none;text-decoration:none;font-size:20px;z-index:999;font-size:25px;color:white;position:fixed;right:10px;bottom:10px;">
+            +RÁPIDO
+        </a>
+        -->
 
 
         <div id="score"
@@ -261,18 +286,19 @@
 
         <div id="no_coupon"
             style="z-index:999;position:fixed;color:white;font-size:30px;left:0;right:0;text-align:center;">
-            RÉCORD 50
+            RETO 50
         </div>
 
 
         <div id="yes_coupon"
             style="z-index:999;display:none;position:fixed;text-decoration:none;color:yellow;font-size:30px;left:10%;right:10%;text-align:center;">
             ¡HAS GANADO UN CUPÓN! <span onclick="website()"
-                style="cursor:pointer;outline:none;text-decoration:underline;">DINORANK.COM</span>
+                style="cursor:pointer;outline:none;border-bottom:1px yellow solid;">DINORANK.COM</span>
             "DINORUN"</div>
 
 
-        <div id="sky">
+        <div
+            style="z-index:900;background-image: linear-gradient(#D11219, #D75133);position:fixed;left:0;right:0;top:0;height:70%;">
         </div>
 
 
@@ -314,6 +340,13 @@
         </div>
 
 
+        <div id="info"
+            style="font-size:20px;opacity:0.8;position:fixed;z-index:999;bottom:10px;left:10px;right:10px;text-align:center;color:white;">
+            salta
+            haciendo
+            click o pulsando espacio</div>
+
+
     </div>
 
 
@@ -324,7 +357,6 @@
 
         var screen_height = $(window).height();
         var screen_width = $(window).width();
-        var is_desktop = screen_width > 800;
         var mountains1 = 0;
         var mountains2 = 0;
         var mountains3 = 0;
@@ -333,6 +365,7 @@
         var tree_width = 81;
         var tree_x = screen_width + tree_width;
         var speed = 3;
+        var min_speed = 1;
         var mountain_width = 921;
         var rex_width = 400;
         var rex_width3;
@@ -346,14 +379,17 @@
         var min_coupon = 50;
         var win = false;
         var timer_seconds = 0;
+        var is_mobile = screen_width < 800;
+        var is_restart = false;
 
-        if (!is_desktop) {
-            //speed = 2;
+        if (is_mobile) {
+            speed = 2;
             rex_width = 200;
             rex_height = 200;
-            rex_left = -10;
-            tree_speed_increase = 0.10;
+            rex_left = -30;
             min_coupon = 20;
+            tree_speed_increase = 0.10;
+            tree_x += screen_width;
 
 
             $('#mountains1').hide();
@@ -365,18 +401,20 @@
             min_coupon = 1;
         }
 
+        if (document.location.href.indexOf('speed') > -1) {
+            speed = parseFloat(document.location.href.split('speed=')[1]);
+        }
+
         rex_width3 = parseInt(rex_width / 3);
 
         rex_right = rex_left + rex_width;
 
-        $('#no_coupon').html('RÉCORD ' + min_coupon);
+        $('#no_coupon').html('RETO ' + min_coupon);
 
         $('.mountains').css('width', 921 * 5);
 
         $('#mountains2').css('left', -200);
         $('#mountains3').css('left', -400);
-
-
 
 
         $('#tree1').css('left', tree_x);
@@ -387,9 +425,26 @@
 
         $('#game').css('height', screen_height + 'px');
 
+
+        if (is_mobile) {
+
+
+
+            //$('#btn_fast').attr('href', 'index.html?speed=' + (speed + 0.25)).show();
+
+            if (1 < speed) {
+                //$('#btn_slow').attr('href', 'index.html?speed=' + (speed - 0.25)).show();
+                $('#btn_slow').show();
+            }
+
+
+
+        }
+
         var music = document.getElementById('music');
         music.volume = 0.5;
 
+        var sound_fail = document.getElementById('sound_fail');
 
 
 
@@ -399,9 +454,9 @@
 
             timer_seconds++;
 
+            if (!is_mobile) {
 
 
-            if (is_desktop) {
 
                 // montaña 1
                 if (timer_seconds % 2 == 0) {
@@ -430,6 +485,7 @@
                     $('#mountains2').css('left', mountains2);
                 }
 
+
                 // montaña 3
                 mountains3 -= (speed - 1) + tree_speed_sum;
 
@@ -439,7 +495,6 @@
 
                 $('#mountains3').css('left', mountains3);
             }
-
 
             // montaña 4
             mountains4 -= speed + tree_speed_sum;
@@ -456,6 +511,12 @@
 
             if (tree_x <= (tree_width * -1)) {
                 tree_x = screen_width + tree_width;
+
+
+                if (is_mobile) {
+                    tree_x += screen_width;
+                }
+
                 round = true;
             }
 
@@ -470,6 +531,18 @@
                 if (is_jumping) {
                     score++;
 
+                    if (score > 1) {
+
+                        $('#info').hide();
+
+
+                        if (is_mobile) {
+                            $('#btn_slow').hide();
+                            //$('#btn_fast').hide();
+                        }
+
+                    }
+
                     if (score > top_score) {
                         top_score = score;
                         $('#top_score').html(top_score);
@@ -482,11 +555,21 @@
 
                         setTimeout(function () {
                             confetti.stop();
-                        }, 1000);
+                        }, 500);
+
+
 
                         $('#no_coupon').hide();
 
                         $('#yes_coupon').show();
+
+
+                        setTimeout(function () {
+
+                            $('#btn_share').css('border-color', 'white').css('background', 'white');
+
+                        }, 2000);
+
 
 
                     }
@@ -498,17 +581,60 @@
 
 
 
+
+                    $('#score').html(score).css('color', '#00ff00').css('opacity', 1);
+
+
+                    setTimeout(function () {
+
+                        $('#score').css('color', 'white').css('opacity', 0.5);
+                    }, 250);
+
+
                 } else {
+
+
+
+
                     score = 0;
                     tree_speed_sum = 0;
                     music.currentTime = 0;
+
+
+                    $('#rex').addClass('blink');
+                    //fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+
+
+                    $('#score').html(score).css('color', '#ff0000').css('opacity', 1);
+
+
+
+                    setTimeout(function () {
+
+                        $('#score').html(score).css('color', 'white').css('opacity', 0.5);
+
+
+
+
+                        $('#rex').removeClass('blink');
+
+                    }, 1000);
+
+                    if (music_playing) {
+                        sound_fail.currentTime = 0;
+                        sound_fail.play();
+
+                        if (is_mobile) {
+                            $('#btn_slow').show();
+                            //$('#btn_fast').show();
+                        }
+                    }
 
 
 
 
 
                 }
-                $('#score').html(score);
             }
 
 
@@ -519,7 +645,20 @@
 
 
         function share() {
-            window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title + ' 👊 ¡Supera mi puntuación! 🔥' + top_score) + '&tw_p=tweetbutton&url=' + document.location.href);
+
+
+            window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title + ' 👊 ¡Supera mi puntuación! 🔥' + top_score) + '&tw_p=tweetbutton&url=' + encodeURIComponent('https://vivirenremoto.github.io/dinorun/'));
+
+
+
+        }
+
+        function author() {
+
+
+            window.open('https://twitter.com/vivirenremoto');
+
+
 
         }
 
@@ -562,13 +701,8 @@
         }
 
         function website() {
-            window.open('https://dinorank.com/');
-            setTimeout(function () {
-                $('#yes_coupon').hide();
-                music_playing = false;
-                music.pause();
+            window.open('https://bit.ly/dinorun1');
 
-            }, 500);
         }
 
         $('body').on('touchstart mousedown', function (e) {
@@ -592,6 +726,19 @@
 
             }
         });
+
+
+
+        $(window).blur(function () {
+            setTimeout(function () {
+                //$('#yes_coupon').hide();
+                music_playing = false;
+                music.pause();
+
+            }, 500);
+        });
+
+
     </script>
 
 

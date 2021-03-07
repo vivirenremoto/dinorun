@@ -15,7 +15,6 @@
     <script src="https://cdn.jsdelivr.net/gh/mathusummut/confetti.js/confetti.min.js"></script>
 
     <link rel="prefetch" href="static/music4.mp3" />
-    <link rel="prefetch" href="static/fail.mp3" />
     <link rel="prefetch" href="static/rex3.gif" />
     <link rel="prefetch" href="static/tree3.png" />
     <link rel="prefetch" href="static/floor3.png" />
@@ -112,23 +111,6 @@
             background-size: cover;
         }
 
-        .blink {
-            animation: blink-animation 0.4s steps(5, start) infinite;
-            -webkit-animation: blink-animation 0.4s steps(5, start) infinite;
-        }
-
-        @keyframes blink-animation {
-            to {
-                visibility: hidden;
-            }
-        }
-
-        @-webkit-keyframes blink-animation {
-            to {
-                visibility: hidden;
-            }
-        }
-
         .tree {
             z-index: 901;
             opacity: 1;
@@ -137,7 +119,7 @@
             height: 130px;
             background-size: contain;
             position: fixed;
-            top: 45%;
+            top: 56%;
         }
 
         #sun1 {
@@ -180,15 +162,21 @@
             top: 74%;
         }
 
-        @media screen and (max-width: 800px) {
+        #sky {
+            z-index: 900;
+            background-image: linear-gradient(#D11219, #D75133);
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 70%;
+        }
 
-            #info {
-                display: none;
-            }
+        @media screen and (max-width: 800px) {
 
             #rex {
                 height: 200px;
-                top: 69%;
+                top: 67%;
                 margin-top: -230px;
             }
 
@@ -196,7 +184,7 @@
             .tree {
                 width: 31px;
                 height: 125px;
-                top: 50%;
+                top: 51%;
             }
 
 
@@ -206,24 +194,26 @@
                 margin-right: -15px;
                 margin-top: -15px;
                 right: 15%;
+                display: none;
             }
 
             #sun2 {
                 width: 40px;
                 height: 40px;
                 right: 15%;
+                display: none;
             }
 
             #yes_coupon {
-                top: 79%;
+                top: 77%;
             }
 
             #no_coupon {
-                top: 79%;
+                top: 77%;
             }
 
-            #btn_share {
-                width: 100px;
+            #sky {
+                background-image: linear-gradient(#D11219, orange);
             }
 
 
@@ -237,48 +227,37 @@
         <source src="static/music4.mp3" type="audio/mp3">
     </audio>
 
-    <audio id="sound_fail">
-        <source src="static/fail.mp3" type="audio/mp3">
-    </audio>
 
 
 
     <div id="game" style="position:fixed;left:0;right:0;top:0;bottom:0;">
 
 
-        <button onclick="share()" style="text-align:left;margin-left:5px;" id="btn_share">
+        <button onclick="share()" style="text-align:left">
 
 
 
-            COMPARTIR RÉCORD <span id="top_score">0</span>
+            COMPARTIR
+
+            <br>
+
+
+
+            RÉCORD <span id="top_score">0</span>
 
 
         </button>
 
 
-        <div onclick="author()"
-            style="cursor:pointer;font-size:20px;z-index:999;font-size:25px;color:black;position:fixed;right:10px;top:10px;">
+        <a href="https://twitter.com/vivirenremoto" target="_blank"
+            style="text-decoration:none;font-size:20px;z-index:999;font-size:25px;color:black;position:fixed;right:10px;top:10px;">
             by @vivirenremoto
-        </div>
+        </a>
 
-
-
-        <a id="btn_slow" href="index2.html"
+        <a href="index.html"
             style="display:none;text-decoration:none;font-size:20px;z-index:999;font-size:25px;color:white;position:fixed;left:10px;bottom:10px;">
-            ¿MUY LENTO?
+            ORIGINAL
         </a>
-
-        <!--
-        <a id="btn_fast" href="#"
-            style="display:none;text-decoration:none;font-size:20px;z-index:999;font-size:25px;color:white;position:fixed;right:10px;bottom:10px;">
-            +LENTO
-        </a>
-        <a id="btn_fast" href="#"
-            style="display:none;text-decoration:none;font-size:20px;z-index:999;font-size:25px;color:white;position:fixed;right:10px;bottom:10px;">
-            +RÁPIDO
-        </a>
-        -->
-
 
         <div id="score"
             style="z-index:999;position:fixed;font-size:130px;text-align:center;left:0;right:0;top:58%;color:white;opacity:0.5;">
@@ -286,19 +265,18 @@
 
         <div id="no_coupon"
             style="z-index:999;position:fixed;color:white;font-size:30px;left:0;right:0;text-align:center;">
-            RETO 50
+            RÉCORD 50
         </div>
 
 
         <div id="yes_coupon"
             style="z-index:999;display:none;position:fixed;text-decoration:none;color:yellow;font-size:30px;left:10%;right:10%;text-align:center;">
             ¡HAS GANADO UN CUPÓN! <span onclick="website()"
-                style="cursor:pointer;outline:none;border-bottom:1px yellow solid;">DINORANK.COM</span>
+                style="cursor:pointer;outline:none;text-decoration:underline;">DINORANK.COM</span>
             "DINORUN"</div>
 
 
-        <div
-            style="z-index:900;background-image: linear-gradient(#D11219, #D75133);position:fixed;left:0;right:0;top:0;height:70%;">
+        <div id="sky">
         </div>
 
 
@@ -340,13 +318,6 @@
         </div>
 
 
-        <div id="info"
-            style="font-size:20px;opacity:0.8;position:fixed;z-index:999;bottom:10px;left:10px;right:10px;text-align:center;color:white;">
-            salta
-            haciendo
-            click o pulsando espacio</div>
-
-
     </div>
 
 
@@ -357,6 +328,7 @@
 
         var screen_height = $(window).height();
         var screen_width = $(window).width();
+        var is_desktop = screen_width > 800;
         var mountains1 = 0;
         var mountains2 = 0;
         var mountains3 = 0;
@@ -365,7 +337,6 @@
         var tree_width = 81;
         var tree_x = screen_width + tree_width;
         var speed = 3;
-        var min_speed = 1;
         var mountain_width = 921;
         var rex_width = 400;
         var rex_width3;
@@ -379,37 +350,37 @@
         var min_coupon = 50;
         var win = false;
         var timer_seconds = 0;
-        var is_mobile = screen_width < 800;
-        var is_restart = false;
 
-        if (is_mobile) {
-            speed = 2;
+        if (!is_desktop) {
+            //speed = 2;
             rex_width = 200;
             rex_height = 200;
-            rex_left = -30;
-            min_coupon = 20;
+            rex_left = -10;
             tree_speed_increase = 0.10;
-            tree_x += screen_width;
+            min_coupon = 20;
+
+
+            $('#mountains1').hide();
+            $('#mountains2').hide();
+            $('#mountains3').hide();
         }
 
         if (document.location.href.indexOf('test') > -1) {
             min_coupon = 1;
         }
 
-        if (document.location.href.indexOf('speed') > -1) {
-            speed = parseFloat(document.location.href.split('speed=')[1]);
-        }
-
         rex_width3 = parseInt(rex_width / 3);
 
         rex_right = rex_left + rex_width;
 
-        $('#no_coupon').html('RETO ' + min_coupon);
+        $('#no_coupon').html('RÉCORD ' + min_coupon);
 
         $('.mountains').css('width', 921 * 5);
 
         $('#mountains2').css('left', -200);
         $('#mountains3').css('left', -400);
+
+
 
 
         $('#tree1').css('left', tree_x);
@@ -420,26 +391,9 @@
 
         $('#game').css('height', screen_height + 'px');
 
-
-        if (is_mobile) {
-
-
-
-            //$('#btn_fast').attr('href', 'index.html?speed=' + (speed + 0.25)).show();
-
-            if (1 < speed) {
-                //$('#btn_slow').attr('href', 'index.html?speed=' + (speed - 0.25)).show();
-                $('#btn_slow').show();
-            }
-
-
-
-        }
-
         var music = document.getElementById('music');
         music.volume = 0.5;
 
-        var sound_fail = document.getElementById('sound_fail');
 
 
 
@@ -451,43 +405,44 @@
 
 
 
+            if (is_desktop) {
 
-            // montaña 1
-            if (timer_seconds % 2 == 0) {
-                mountains1 -= 1 + tree_speed_sum;
+                // montaña 1
+                if (timer_seconds % 2 == 0) {
+                    mountains1 -= 1 + tree_speed_sum;
 
 
-                if (mountains1 <= (mountain_width * -1)) {
-                    mountains1 = 0;
+                    if (mountains1 <= (mountain_width * -1)) {
+                        mountains1 = 0;
+                    }
+
+
+
+                    $('#mountains1').css('left', mountains1);
                 }
 
-
-
-                $('#mountains1').css('left', mountains1);
-            }
-
-            // montaña 2
-            if (timer_seconds % 1 == 0) {
-                mountains2 -= 1 + tree_speed_sum;
+                // montaña 2
+                if (timer_seconds % 1 == 0) {
+                    mountains2 -= 1 + tree_speed_sum;
 
 
 
-                if (mountains2 <= (mountain_width * -1)) {
-                    mountains2 = 0;
+                    if (mountains2 <= (mountain_width * -1)) {
+                        mountains2 = 0;
+                    }
+
+                    $('#mountains2').css('left', mountains2);
                 }
 
-                $('#mountains2').css('left', mountains2);
+                // montaña 3
+                mountains3 -= (speed - 1) + tree_speed_sum;
+
+                if (mountains3 <= (mountain_width * -1)) {
+                    mountains3 = 0;
+                }
+
+                $('#mountains3').css('left', mountains3);
             }
-
-
-            // montaña 3
-            mountains3 -= (speed - 1) + tree_speed_sum;
-
-            if (mountains3 <= (mountain_width * -1)) {
-                mountains3 = 0;
-            }
-
-            $('#mountains3').css('left', mountains3);
 
 
             // montaña 4
@@ -505,12 +460,6 @@
 
             if (tree_x <= (tree_width * -1)) {
                 tree_x = screen_width + tree_width;
-
-
-                if (is_mobile) {
-                    tree_x += screen_width;
-                }
-
                 round = true;
             }
 
@@ -525,18 +474,6 @@
                 if (is_jumping) {
                     score++;
 
-                    if (score > 1) {
-
-                        $('#info').hide();
-
-
-                        if (is_mobile) {
-                            $('#btn_slow').hide();
-                            //$('#btn_fast').hide();
-                        }
-
-                    }
-
                     if (score > top_score) {
                         top_score = score;
                         $('#top_score').html(top_score);
@@ -549,21 +486,11 @@
 
                         setTimeout(function () {
                             confetti.stop();
-                        }, 500);
-
-
+                        }, 1000);
 
                         $('#no_coupon').hide();
 
                         $('#yes_coupon').show();
-
-
-                        setTimeout(function () {
-
-                            $('#btn_share').css('border-color', 'white').css('background', 'white');
-
-                        }, 2000);
-
 
 
                     }
@@ -575,60 +502,17 @@
 
 
 
-
-                    $('#score').html(score).css('color', '#00ff00').css('opacity', 1);
-
-
-                    setTimeout(function () {
-
-                        $('#score').css('color', 'white').css('opacity', 0.5);
-                    }, 250);
-
-
                 } else {
-
-
-
-
                     score = 0;
                     tree_speed_sum = 0;
                     music.currentTime = 0;
-
-
-                    $('#rex').addClass('blink');
-                    //fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
-
-
-                    $('#score').html(score).css('color', '#ff0000').css('opacity', 1);
-
-
-
-                    setTimeout(function () {
-
-                        $('#score').html(score).css('color', 'white').css('opacity', 0.5);
-
-
-
-
-                        $('#rex').removeClass('blink');
-
-                    }, 1000);
-
-                    if (music_playing) {
-                        sound_fail.currentTime = 0;
-                        sound_fail.play();
-
-                        if (is_mobile) {
-                            $('#btn_slow').show();
-                            //$('#btn_fast').show();
-                        }
-                    }
 
 
 
 
 
                 }
+                $('#score').html(score);
             }
 
 
@@ -639,20 +523,7 @@
 
 
         function share() {
-
-
-            window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title + ' 👊 ¡Supera mi puntuación! 🔥' + top_score) + '&tw_p=tweetbutton&url=' + encodeURIComponent('https://vivirenremoto.github.io/dinorun/'));
-
-
-
-        }
-
-        function author() {
-
-
-            window.open('https://twitter.com/vivirenremoto');
-
-
+            window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title + ' 👊 ¡Supera mi puntuación! 🔥' + top_score) + '&tw_p=tweetbutton&url=' + document.location.href);
 
         }
 
@@ -695,8 +566,13 @@
         }
 
         function website() {
-            window.open('https://bit.ly/dinorun1');
+            window.open('https://dinorank.com/');
+            setTimeout(function () {
+                $('#yes_coupon').hide();
+                music_playing = false;
+                music.pause();
 
+            }, 500);
         }
 
         $('body').on('touchstart mousedown', function (e) {
@@ -720,19 +596,6 @@
 
             }
         });
-
-
-
-        $(window).blur(function () {
-            setTimeout(function () {
-                //$('#yes_coupon').hide();
-                music_playing = false;
-                music.pause();
-
-            }, 500);
-        });
-
-
     </script>
 
 
