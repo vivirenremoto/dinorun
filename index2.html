@@ -173,7 +173,7 @@
 
 
         #yes_coupon {
-            top: 74%;
+            bottom: 10px;
         }
 
         #no_coupon {
@@ -214,10 +214,6 @@
                 right: 15%;
             }
 
-            #yes_coupon {
-                top: 79%;
-            }
-
             #no_coupon {
                 top: 79%;
             }
@@ -243,7 +239,7 @@
 
 
 
-    <div id="game" style="position:fixed;left:0;right:0;top:0;bottom:0;">
+    <div id="game" style="display:none;position:fixed;left:0;right:0;top:0;bottom:0;">
 
 
         <button onclick="share()" style="text-align:left;margin-left:5px;" id="btn_share">
@@ -450,198 +446,206 @@
 
 
 
-        setInterval(function () {
+        function startGame() {
 
-            timer_seconds++;
+            $('#game').fadeIn('slow');
 
-            if (!is_mobile) {
-
-
-
-                // montaña 1
-                if (timer_seconds % 2 == 0) {
-                    mountains1 -= 1 + tree_speed_sum;
+            setInterval(function () {
 
 
-                    if (mountains1 <= (mountain_width * -1)) {
-                        mountains1 = 0;
-                    }
+                timer_seconds++;
+
+                if (!is_mobile) {
 
 
 
-                    $('#mountains1').css('left', mountains1);
-                }
-
-                // montaña 2
-                if (timer_seconds % 1 == 0) {
-                    mountains2 -= 1 + tree_speed_sum;
+                    // montaña 1
+                    if (timer_seconds % 2 == 0) {
+                        mountains1 -= 1 + tree_speed_sum;
 
 
-
-                    if (mountains2 <= (mountain_width * -1)) {
-                        mountains2 = 0;
-                    }
-
-                    $('#mountains2').css('left', mountains2);
-                }
-
-
-                // montaña 3
-                mountains3 -= (speed - 1) + tree_speed_sum;
-
-                if (mountains3 <= (mountain_width * -1)) {
-                    mountains3 = 0;
-                }
-
-                $('#mountains3').css('left', mountains3);
-            }
-
-            // montaña 4
-            mountains4 -= speed + tree_speed_sum;
-
-            if (mountains4 <= (mountain_width * -1)) {
-                mountains4 = 0;
-            }
-
-            $('#mountains4').css('left', mountains4);
-
-            // score
-
-            tree_x -= speed + tree_speed_sum;
-
-            if (tree_x <= (tree_width * -1)) {
-                tree_x = screen_width + tree_width;
-
-
-                if (is_mobile) {
-                    tree_x += screen_width;
-                }
-
-                round = true;
-            }
-
-            var tree_diff = parseInt(5 + tree_speed_sum);
-
-            if (((tree_x - tree_diff) < (rex_right - rex_width3)) && ((tree_x + tree_diff) > (rex_right - rex_width3)) && round) {
-
-
-                round = false;
-
-
-                if (is_jumping) {
-                    score++;
-
-                    if (score > 1) {
-
-                        $('#info').hide();
-
-
-                        if (is_mobile) {
-                            $('#btn_slow').hide();
-                            //$('#btn_fast').hide();
+                        if (mountains1 <= (mountain_width * -1)) {
+                            mountains1 = 0;
                         }
 
+
+
+                        $('#mountains1').css('left', mountains1);
                     }
 
-                    if (score > top_score) {
-                        top_score = score;
-                        $('#top_score').html(top_score);
-                    }
-
-                    if (!win && score == min_coupon) {
-                        win = true;
-
-                        confetti.start();
-
-                        setTimeout(function () {
-                            confetti.stop();
-                        }, 500);
+                    // montaña 2
+                    if (timer_seconds % 1 == 0) {
+                        mountains2 -= 1 + tree_speed_sum;
 
 
 
-                        $('#no_coupon').hide();
-
-                        $('#yes_coupon').show();
-
-
-                        setTimeout(function () {
-
-                            $('#btn_share').css('border-color', 'white').css('background', 'white');
-
-                        }, 2000);
-
-
-
-                    }
-
-
-
-
-                    tree_speed_sum += tree_speed_increase;
-
-
-
-
-                    $('#score').html(score).css('color', '#00ff00').css('opacity', 1);
-
-
-                    setTimeout(function () {
-
-                        $('#score').css('color', 'white').css('opacity', 0.5);
-                    }, 250);
-
-
-                } else {
-
-
-
-
-                    score = 0;
-                    tree_speed_sum = 0;
-                    music.currentTime = 0;
-
-
-                    $('#rex').addClass('blink');
-                    //fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
-
-
-                    $('#score').html(score).css('color', '#ff0000').css('opacity', 1);
-
-
-
-                    setTimeout(function () {
-
-                        $('#score').html(score).css('color', 'white').css('opacity', 0.5);
-
-
-
-
-                        $('#rex').removeClass('blink');
-
-                    }, 1000);
-
-                    if (music_playing) {
-                        sound_fail.currentTime = 0;
-                        sound_fail.play();
-
-                        if (is_mobile) {
-                            $('#btn_slow').show();
-                            //$('#btn_fast').show();
+                        if (mountains2 <= (mountain_width * -1)) {
+                            mountains2 = 0;
                         }
+
+                        $('#mountains2').css('left', mountains2);
                     }
 
 
+                    // montaña 3
+                    mountains3 -= (speed - 1) + tree_speed_sum;
 
+                    if (mountains3 <= (mountain_width * -1)) {
+                        mountains3 = 0;
+                    }
 
-
+                    $('#mountains3').css('left', mountains3);
                 }
-            }
+
+                // montaña 4
+                mountains4 -= speed + tree_speed_sum;
+
+                if (mountains4 <= (mountain_width * -1)) {
+                    mountains4 = 0;
+                }
+
+                $('#mountains4').css('left', mountains4);
+
+                // score
+
+                tree_x -= speed + tree_speed_sum;
+
+                if (tree_x <= (tree_width * -1)) {
+                    tree_x = screen_width + tree_width;
+
+
+                    if (is_mobile) {
+                        tree_x += screen_width;
+                    }
+
+                    round = true;
+                }
+
+                var tree_diff = parseInt(5 + tree_speed_sum);
+
+                if (((tree_x - tree_diff) < (rex_right - rex_width3)) && ((tree_x + tree_diff) > (rex_right - rex_width3)) && round) {
+
+
+                    round = false;
+
+
+                    if (is_jumping) {
+                        score++;
+
+                        if (score > 1) {
+
+                            $('#info').hide();
+
+
+                            if (is_mobile) {
+                                $('#btn_slow').hide();
+                                //$('#btn_fast').hide();
+                            }
+
+                        }
+
+                        if (score > top_score) {
+                            top_score = score;
+                            $('#top_score').html(top_score);
+                        }
+
+                        if (!win && score == min_coupon) {
+                            win = true;
+
+                            confetti.start();
+
+                            setTimeout(function () {
+                                confetti.stop();
+                            }, 500);
 
 
 
-            $('#tree1').css('left', tree_x);
+                            $('#no_coupon').hide();
+                            $('#info').hide();
 
-        }, 1);
+                            $('#yes_coupon').show();
+
+
+                            setTimeout(function () {
+
+                                $('#btn_share').css('border-color', 'white').css('background', 'white');
+
+                            }, 2000);
+
+
+
+                        }
+
+
+
+
+                        tree_speed_sum += tree_speed_increase;
+
+
+
+
+                        $('#score').html(score).css('color', '#00ff00').css('opacity', 1);
+
+
+                        setTimeout(function () {
+
+                            $('#score').css('color', 'white').css('opacity', 0.5);
+                        }, 250);
+
+
+                    } else {
+
+
+
+
+                        score = 0;
+                        tree_speed_sum = 0;
+                        music.currentTime = 0;
+
+
+                        $('#rex').addClass('blink');
+                        //fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+
+
+                        $('#score').html(score).css('color', '#ff0000').css('opacity', 1);
+
+
+
+                        setTimeout(function () {
+
+                            $('#score').html(score).css('color', 'white').css('opacity', 0.5);
+
+
+
+
+                            $('#rex').removeClass('blink');
+
+                        }, 1000);
+
+                        if (music_playing) {
+                            sound_fail.currentTime = 0;
+                            sound_fail.play();
+
+                            if (is_mobile) {
+                                $('#btn_slow').show();
+                                //$('#btn_fast').show();
+                            }
+                        }
+
+
+
+
+
+                    }
+                }
+
+
+
+                $('#tree1').css('left', tree_x);
+
+            }, 1);
+
+        }
 
 
         function share() {
@@ -726,6 +730,14 @@
 
             }
         });
+
+
+        window.addEventListener('load', (evt) => {
+            setTimeout(function () {
+                startGame();
+            }, 500);
+        });
+
 
 
 
