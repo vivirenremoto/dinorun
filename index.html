@@ -618,7 +618,7 @@
                             sound_fail.currentTime = 0;
                             sound_fail.play();
 
-                            if (is_mobile) {
+                            if (is_mobile && !win) {
                                 $('#btn_slow').show();
                                 //$('#btn_fast').show();
                             }
